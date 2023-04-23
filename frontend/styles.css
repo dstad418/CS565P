@@ -8,16 +8,15 @@
   }
   
   .back-drop {
-    background-color: var(--dark-green);
+    background-color: var(--light-grey);
   }
   
   .front-drop {
-    margin: 20px;
+    margin: 6%;
     margin-top: -40px;
     border-radius: 10px;
     padding: 10px;
     background-color: var(--white);
-    border: 5px solid var(--blue);
   }
   
   /*----------- NAV BAR SECTION ---------------*/
@@ -26,12 +25,12 @@
     display: flex;
     justify-content: end;
     position: fixed;
-    margin-left: -40px;
+    margin-left: -80px;
     margin-top: 20px;
     margin-bottom: 0;
     margin-right: 20px;
     width: 120%;
-    height: 5vh;
+    height: 10vh;
     list-style: none;
     font-size: 1.1em;
     z-index: 999;
@@ -46,86 +45,19 @@
   .nav-commander {
     width: 100%;
   }
+
   
-  /*----------------- ABOUT SECTION -------------*/
-  .intro {
-    color: var(--blue);
-    font-size: 2.75em;
-    margin-bottom: 100px;
-    text-align: center;
-    font-weight: bold;
-    padding-top: 30px;
-  }
+  /*---------------------- CAROUSEL SECTION --------------------*/
   
-  .img-fluid {
-    border-radius: 10px;
-    border: 5px solid;
-    border-color: #1773ff;
-  }
-  
-  .about {
-    margin: 20px;
-  }
-  
-  .about-me {
-    margin-top: -40px;
-  }
-  
-  .description-border {
-    background-color: #f2e9e9;
-    border-radius: 10px;
-  }
-  
-  .description {
-    background-color: rgba(243, 238, 238, 0.851);
-    font-size: 1.25rem;
-    border-radius: 10px;
-    margin: 10px;
-  }
-  
-  .experience-gap {
-    padding-top: 20px;
-    padding-bottom: 40px;
-  }
-  
-  .experience-outer {
-    padding-left: 20px;
-  }
-  
-  .experience-inner {
-    margin: 20px;
-  }
-  
-  .list-group {
-    margin-right: 10%;
-  }
-  
-  .skill-descriptions {
-    margin: 10px;
-    margin-right: 20px;
-  }
-  
-  /*----------------------PROJECT SECTION--------------------*/
-  
-  .projects-gap {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  
-  .project-intro {
-    padding-top: 60px;
-    padding-left: 20px;
-  }
-  
-  /*      SPECIFICALLY FOR THE CONTENT WITHIN THE CAROUSELS      */
   .description-content {
     font-size: 1.25em;
   }
   
   .carousel {
     position: relative;
-    height: 700px;
+    height: 400px;
     width: 80%;
+    padding-top: 90px;
     margin: 0 auto;
   }
   
@@ -163,7 +95,6 @@
     background-position: center;
   }
   
-  /*      SPECIFICALLY THE CAROUSEL TRACK     */
   .carousel__track-container {
     background: #ffffff;
     height: 100%;
@@ -235,53 +166,35 @@
     display: none;
   }
   
-  /*------------------CONTACT BLOCK SECTION-----------------*/
-  .contact-head {
-    margin-top: 90px;
-    margin-left: 20px;
+   /*---------------------- ADDING A SPACER BETWEEN THE CAROUSEL AND MODULES --------------------*/  
+  .spacer-between-modules {
+    margin: 120px;
   }
   
-  .contact-block {
-    padding: 20px;
-    padding-left: 10%;
-    padding-right: 10%;
+  
+  /*---------------------- MODULE SECTION --------------------*/  
+  
+  .module-block {
+    display: inline-block;
+    width: 33%;
+    border-style: solid;
+    border-color: 10px lightgray;
+}
+  
+.module-UL {
+    list-style-type: none;
+}
+  
+.module-LI {
+    display: inline;
   }
   
-  .jumbotron {
-    padding: 10%;
-    border-radius: 10px;
-    border: 5px;
-    border-color: #1773ff;
+  .module-cover {
+    width: 100%;
   }
-  
-  /*      BUTTON CUSTOMIZATIONS     */
-  .btn-primary {
-    background-color: lightblue;
-    color: black;
-  }
-  
-  .btn-primary:active {
-    background-color: orange;
-    color: black;
-  }
-  
-  .btn-primary:hover {
-    background-color: black;
-    color: yellow;
-  }
-  
-  .btn-secondary {
-    background-color: rgb(110, 103, 103);
-    color: white;
-  }
-  
-  .btn-secondary:active {
-    background-color: #1773ff;
-    color: rgb(134, 128, 128);
-  }
-  
-  .btn-secondary:hover {
-    background-color: orange;
-    color: black;
-  }
-  
+
+.module-text {
+    color: #000000;
+    padding: 5px;
+}
+ 
