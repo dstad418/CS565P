@@ -25,7 +25,7 @@
     display: flex;
     justify-content: end;
     position: fixed;
-    margin-left: -80px;
+    margin-left: -8%;
     margin-top: 20px;
     margin-bottom: 0;
     margin-right: 20px;
@@ -45,21 +45,90 @@
   .nav-commander {
     width: 100%;
   }
+  
+  /***********************  BANNER *********************/
+  .spacer-between-modules {
+    margin-left: -10%;
+    margin-right: -10%;
+    margin-top: -25%;
+    z-index: 899;
+  }
+  
+  .website-banner {
+    height: auto;
+    width: 100%;
+  }
+  
+  
+  .hello {
+    position: relative;
+    background-color: #000000;
+    color: white;
+    z-index: 900;
+  }
+  
+  .intro-message {
+    font-size: 1.2em;
+    margin-top: -18%;
+    margin-bottom: 12%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
+
+  /*---------------------- SPACERS --------------------*/
+  .pre-carousel-spacer {
+    margin: 30px;
+  }
+
+  .post-carousel-spacer {
+    margin: 150px;
+  }
+
+/*---------------------- MODULE SECTION --------------------*/  
+  
+.module-row {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+  
+.module-block {
+    flex: 1;
+    width: (100%/3);
+    border-style: solid;
+    border-color: 10px lightgray;
+    height: 100%;
+}
+  
+.module-cover {
+    width: 100%;
+ }
+
+.module-text {
+    color: #000000;
+    padding: 5px;
+}
+ 
+.jump-to-top {
+    width: 150%;
+    margin-left: -20%;
+    background-color: #1773ff;
+    height: 80px;
+}
   
   /*---------------------- CAROUSEL SECTION --------------------*/
   
-  .description-content {
+.description-content {
     font-size: 1.25em;
-  }
+}
   
-  .carousel {
+.carousel {
     position: relative;
     height: 400px;
     width: 80%;
-    padding-top: 90px;
     margin: 0 auto;
-  }
+}
   
   .carousel__content {
     position: relative;
@@ -165,36 +234,3 @@
   .is-hidden {
     display: none;
   }
-  
-   /*---------------------- ADDING A SPACER BETWEEN THE CAROUSEL AND MODULES --------------------*/  
-  .spacer-between-modules {
-    margin: 120px;
-  }
-  
-  
-  /*---------------------- MODULE SECTION --------------------*/  
-  
-  .module-block {
-    display: inline-block;
-    width: 33%;
-    border-style: solid;
-    border-color: 10px lightgray;
-}
-  
-.module-UL {
-    list-style-type: none;
-}
-  
-.module-LI {
-    display: inline;
-  }
-  
-  .module-cover {
-    width: 100%;
-  }
-
-.module-text {
-    color: #000000;
-    padding: 5px;
-}
- 
