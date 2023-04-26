@@ -60,7 +60,7 @@
   .button {
     display: inline-block;
     padding: 15px 25px;
-    margin-top: 8px;
+    margin-top: 15px;
     margin-left: 14%;
     font-size: 24px;
     cursor: pointer;
@@ -113,6 +113,11 @@
 
 
   /*---------------------- SPACERS --------------------*/
+  
+  .banner-spacer {
+    height: 40px;
+  }
+  
   .pre-carousel-spacer {
     margin: 30px;
   }
