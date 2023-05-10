@@ -1,0 +1,4 @@
+// Constructs the database
+// Seeders: FIlls the database up
+// Mikro-orm-config says how to connect to the database
+// Entities describes what goes in the database
