@@ -1,0 +1,390 @@
+// Constructs the database
+// Seeders: FIlls the database up
+// Mikro-orm-config says how to connect to the database
+// Entities describes what goes in the database
+
+
+```js
+let userPromise = new Promise(function (resolve, reject) {
+	let user = GetUser(1);
+	//could be false?
+	if (user) resolve(user)
+	else reject("User not found!");
+})
+```
+
+- How does this help in our quest to reduce nesting?  Now we basically still have to check, right?
+- JS has a special set of Promise-related methods to help us! `then, catch, and finally`
+
+```js
+userPromise.then( result => {
+	console.log("Promise completed successfully: ", result);
+}).catch( error => {
+	console.log("Promise was rejected: ", error);
+}).finally( () => {
+	console.log("Promise has completed");
+})
+```
+
+- Lets see what this would look like in a real world "server" example:
+```js
+
+let netData = url => {
+  return new Promise (function (resolve, reject) {
+    let request = fetch(url)
+      .then( res => {
+        console.log(res);
+        if (res.status === 200) {
+          resolve(res);
+        } else {
+          reject(res.status);
+        }
+      })
+      .catch( err => {
+        console.error("unable to fetch: ", err);
+        reject(err);
+      });
+  })
+}
+
+const apiurl = "https://catfact.ninja/fact";
+netData(apiurl)
+.then( res => console.log(res.json()))
+.catch( err => console.log(err))
+.finally(() => console.log("Done"));
+```
+
+- So lets look at what this printed -- Big blob of response, but also `Promise { <pending> }`
+-  What have we done wrong here?
+- This is INCREDIBLY easy mistake to make that will totally confuse your bug hunting abilities.  `res.json()` ALSO returns a promise!  But our Console.log uses it as if it weren't.
+- So we need to `then()` it, too!
+```js
+netData(apiurl)
+	.then( (res: Response): Promise<JSON> => {
+		console.log("Initial response is: ", res);
+		return res.json();
+	})
+	.then( (json: JSON) => {
+		console.log("JSON body is:", json);
+	})
+	.catch((err) => {
+		console.log("Unable to fetch:", err);
+	})
+	.finally(() => console.log("Done"));
+
+```
+
+
+
+- This now LOOKS like synchronous programming!  No hint of anything tricky, no nesting, no confusion at all.  But in practice, it will happen asynchronously in between the other 800k requests.  Lets add some more async fns just to reinforce:
+```js
+const databaseReady = () => {
+	return new Promise( resolve => {
+		//imagine we do some database things
+		//we'll fake it by starting a 2 second timer
+		setTimeout(() => resolve("Database is ready."), 2000);
+	});
+};
+
+const connectToDatabase = () => {
+	return new Promise( resolve => {
+		setTimeout(() => resolve("Connected To Database"), 1000);
+	});
+};
+
+const databaseQuery = () => {
+	return new Promise( resolve => {
+		setTimeout(() => resolve("Query Successful"), 1000);
+	});
+};
+
+
+async function checkDatabase() {
+	const dbStatus = await databaseReady();
+	console.log(dbStatus);
+	const dbConn = await connectToDatabase();
+	console.log(dbConn);
+	const dbQuery = await databaseQuery();
+	console.log(dbQuery);
+	console.log("Database ops completed");
+}
+
+await checkDatabase();
+
+export {};
+```
+
+
+
+
+- Web is a bunch of pages all hosted on various computers around the world.  When we open our browser to google.com, we ask Google's server to send us the web page it's hosting.  This is a request.  Google determines what we wanted based on this request, and sends it back.  This is a response.  Our browser takes that response and uses it to render google's search.  ALL of the web operates using this same cycle.  This also goes for ALL types of things, files, images, videos, etc, not just HTML!
+- To be thorough, at a lower level, it follows this flow:
+	- Browser sees request to google.com
+	- Browser asks a DNS server which IP address is assigned to google.com
+	- Browser requests a connection to that remote IP address using a lower level protocol called TCP or Transmission Control Protocol.
+	- If the server accepts the request, it will open a TCP socket to the browser, send a response back via that socket, then close the connection
+	- THIS STARTS OVER on EACH request!
+- This cycle of request/response, above the socket layer, uses a particular language protocol itself, called HTTP.  As you might expect based on sockets closing after each request, HTTP is stateless as well.  That means each request has to include ALL of its relevant information.
+- If we look at a basic HTTP request `GET /index.html HTTP/1.1` we can see that it specifies the exact file it wants, identifies which version of HTTP it is using, and has one other GET
+- HTTP Verbs - think of them as request methods, important ones:
+```
+GET - retrieve data
+POST - submit new data to server, changing state and causing side effects
+PUT - replace data already on the server
+DELETE - delete something already on the server
+```
+- HTTP Status Codes - similar, but for responses and indicate result status:
+```
+404 - Not Found
+200 - Successful
+301 - Redirected
+500 - Something bad happened who knows maybe fire
+
+
+- So we might already start to imagine that we'll be using these status codes somewhere in our server.  In fact, we already know everything we need to piece together what our server needs to do!
+1. Accept incoming connections from clients
+2. Figure out which type of request (verb) it is
+3. Make whatever changes/collect whatever resources the request wanted
+4. Send back a response with the status code and resources, if any
+5. Close connection
+
+
+`Middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle. The next middleware function is commonly denoted by a variable named next.`
+
+
+
+
+
+
+
+# WARNING
+```
+**Hooks—functions starting with `use`—can only be called at the top level of your components or [your own Hooks.](https://beta.reactjs.org/learn/reusing-logic-with-custom-hooks)**
+You can’t call Hooks inside conditions, loops, or other nested functions. Hooks are functions, but it’s helpful to think of them as unconditional declarations about your component’s needs.
+You “use” React features at the top of your component similar to how you “import” modules at the top of your file.
+
+
+
+
+
+
+
+
+```ts
+export const Button = () => {
+ return (
+  <button>
+   I am useless.
+  </button>
+ );
+}
+```
+
+And add an onClick function to it as a parameter like this
+```ts
+export const Button = () => {
+ return (
+  <button onClick={() => {
+   alert("Clicked!");
+  }
+  }>
+   Click me!
+  </button>
+ );
+
+}
+```
+
+- Can trade alert for our old faithful console.log and see it in browser
+
+### Now we're moving on to State.
+- Lets try naively adding a counter that counts up one each click:
+```ts
+export const Button = () => {
+ let clicks = 0;
+ return (
+  <button onClick={() => {
+   console.log("Clicked!");
+   clicks++;
+   console.log("Clicks is: ", clicks);
+  }
+  }>
+   Clicks: {clicks}
+  </button> );
+}
+```
+
+- Doesn't work bc React calls this WHOLE function on each rerender, so we are resetting our clicks every time!  Even worse, React won't even pay attention to changes in local variables, so it doesn't even update to show 1 click!  useState provides us solutions to BOTH of these at the same time:
+```ts
+export const Button = () => {
+ let [clicks, setClicks] = useState(0);
+
+ return (
+  <button onClick={() => {
+   setClicks(clicks + 1);
+}
+  }>
+   Clicks: {clicks}
+  </button> );
+}
+```
+
+
+
+
+This will run the effect function on page load, then NEVER AGAIN because `[]`.  Once it's done awaiting, it will call setUsers() from our state hook to update, which we use to render.  This makes our full code:
+
+```ts
+export const Users = () => {
+ const [users, setUsers] = useState([]);
+
+ useEffect(() => {
+  const getUsers = async () => {
+   const users = await axios.get(
+    "http://localhost:8080/users"
+   );
+   setUsers(users.data);
+  };
+  void getUsers();
+ }, []);
+
+ return (
+  <div>
+   <h2>Users:</h2>
+   {    users ?
+     <ul>{users.map((user: {email: string, name: string}) => <li key={user.email.toString()}>{user.name} - {user.email}</li>)}</ul>
+     : null
+   }
+  </div> );
+};
+```
+
+Finally we see information from our backend in the browser!  Our first trip is done.
+
+
+
+
+
+
+
+Instead, React will provide a handy-dandy place to put our async things, as well as any other functions that need to be re-executed ONLY WHEN some condition occurs.
+
+This is what it looks like:
+```ts
+const [users, setUsers] = useState([]);
+
+useEffect( () => {
+
+		const getUsers = async () => {
+			const usersRes = await axios.get("http://localhost:8080/users");
+			return usersRes.data;
+		};
+
+		getUsers().then(setUsers);
+	}, []);
+```
+
+This will run the effect function on page load, then NEVER AGAIN because `[]`.  Once it's done awaiting, it will call setUsers() from our state hook to update, which we use to render.  This makes our full code:
+
+```ts
+export const Users = () => {
+ const [users, setUsers] = useState([]);
+
+ useEffect(() => {
+  const getUsers = async () => {
+   const users = await axios.get(
+    "http://localhost:8080/users"
+   );
+   setUsers(users.data);
+  };
+  void getUsers();
+ }, []);
+
+	return (
+		<div>
+			<h2>Users:</h2>
+			{    users ?
+				<ul>{users.map((user: {email: string, name: string}) => <li key={user.email.toString()}>{user.name} - {user.email}</li>)}</ul>
+				: null
+			}
+		</div>
+	);
+```
+
+
+
+
+
+DISPLAYS RANDOM USER!!!!
+
+import { State, ProfileType } from "./types/DoggrTypes";
+
+const initialState: { likeHistory: ProfileType[]; currentProfile: ProfileType } = {
+ currentProfile: getRandomProfile(),
+ likeHistory: [getRandomProfile(), getRandomProfile()],
+};
+
+export default initialState;
+
+export function getRandomProfile(): ProfileType {
+ const idNum = Math.random() * 10000;
+
+ return {
+  imgUri: `https://loremflickr.com/300/300/animal?lock=${idNum}`,
+  thumbUri: `https://loremflickr.com/75/75/animal?lock=${idNum}`,
+  name: `Doggr${idNum}`,
+  id: idNum,
+ };
+}
+```
+
+
+
+
+
+** Now, inside of Home.tsx, we can create a little landing page:
+```ts
+export default function Home() {
+    return (<div>
+        <h1>Doggr</h1>
+        <h3>Where your pets finds love(tm)</h3>
+
+      </div>    );
+  }
+```
+
+Just to emphasize composability, lets convert this into multiple Components:
+
+```ts
+export default function Home() {
+    return (<div>
+        <Title />          <Subtitle />
+      </div>    );
+  }
+
+export function Title() {
+    return(<h1>Doggr</h1>)
+}
+
+export function Subtitle() {
+    return(<h3>Where your pets find love(tm)</h3>)
+}
+```
+
+
+
+
+
+
+
+
+ ONE "Stateful" component per file.  Multiple stateless (Pure!) components may share a file.
+
+
+
+
+
+
+
+
+
