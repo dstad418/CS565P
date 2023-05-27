@@ -6,17 +6,16 @@ import { useEffect, useState } from "react";
 // 3) Show the list of users formatted nicely in our webpage
 export const UsersList = () => {
 	const [users, setUsers] = useState([]);
-	
+
 	useEffect(() => {
 		const getUsers = async () => {
 			const usersRes = await axios.get("http://localhost:8080/users");
 			return usersRes.data;
 		};
-		
-		getUsers()
-			.then(setUsers);
+
+		getUsers().then(setUsers);
 	}, []);
-	
+
 	return (
 		<div>
 			<h2>Users:</h2>

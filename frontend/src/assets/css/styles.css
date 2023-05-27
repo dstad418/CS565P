@@ -1,3 +1,5 @@
+/*
+
 :root {
     --blue: #1773ff;
     --dark-blue: #1818af;
@@ -20,6 +22,8 @@
   }
   
   /*----------- NAV BAR SECTION ---------------*/
+/*
+
   .navbar {
     border-radius: 10px;
     display: flex;
@@ -57,6 +61,7 @@
   }
   
   /*    IDEA GOTTEN FROM W3 SITE TO MAKE MY SIGN-IN BUTTON PRETTIER      */
+/*
   .button {
     display: inline-block;
     padding: 15px 25px;
@@ -83,6 +88,7 @@
   }
   
   /***********************  BANNER *********************/
+/*
   .spacer-between-modules {
     margin-left: -10%;
     margin-right: -10%;
@@ -113,6 +119,7 @@
 
 
   /*---------------------- SPACERS --------------------*/
+/*
   
   .banner-spacer {
     height: 40px;
@@ -126,7 +133,8 @@
     margin: 150px;
   }
 
-/*---------------------- MODULE SECTION --------------------*/  
+/*---------------------- MODULE SECTION --------------------*/
+/*
   
 .module-row {
   display: grid;
@@ -170,6 +178,7 @@
 
   /*---------------------- CAROUSEL SECTION --------------------*/
 /*
+
 .description-content {
     font-size: 1.25em;
 }

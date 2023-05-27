@@ -28,7 +28,7 @@ describe("Renders React components correctly", async () => {
 		const testRender = render(<App />);
 		// Setup
 		const h1 = await screen.queryByText("Vite + React");
-		
+
 		// Expectations
 		expect(h1).not.toBeNull();
 		expect(h1).toBeVisible();

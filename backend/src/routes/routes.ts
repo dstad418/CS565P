@@ -16,10 +16,14 @@ async function DoggrRoutes(app: FastifyInstance, _options = {}) {
 	if (!app) {
 		throw new Error("Fastify instance has no value during routes construction");
 	}
-	
+
 	UserRoutesInit(app);
 	MatchRoutesInit(app);
 	MessageRoutesInit(app);
+
+	app.get("/", async (req, reply) => {
+		reply.send("Hello world");
+	})
 }
 
 export default DoggrRoutes;

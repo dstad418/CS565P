@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-.env.ts.example
+.env
 doc/
 build/

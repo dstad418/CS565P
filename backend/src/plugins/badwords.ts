@@ -24,7 +24,7 @@ export async function fetchBadWords() {
 	// Fetch word list from google
 	const wordRes = await axios.get(badUrl);
 	const wordSet = new Set<string>();
-	
+
 	// Coerce the data into a Set
 	wordRes.data.split("\r\n").forEach( (word) => {
 		wordSet.add(word);
