@@ -1,9 +1,9 @@
 import { BaseEntity, PrimaryKey, Property } from "@mikro-orm/core";
 import { SoftDeletable } from "mikro-orm-soft-delete";
 
-@SoftDeletable(() => DoggrBaseEntity, "deleted_at", () => new Date())
+@SoftDeletable(() => DungeonBaseEntity, "deleted_at", () => new Date())
 //https://mikro-orm.io/docs/defining-entities/#using-mikroorms-baseentity-previously-wrappedentity
-export class DoggrBaseEntity extends BaseEntity<DoggrBaseEntity, "id"> {
+export class DungeonBaseEntity extends BaseEntity<DungeonBaseEntity, "id"> {
   @PrimaryKey()
 	id!: number;
 	
@@ -17,8 +17,8 @@ export class DoggrBaseEntity extends BaseEntity<DoggrBaseEntity, "id"> {
 	deleted_at?: Date;
 }
 
-@SoftDeletable(() => DoggrCompositeEntity, "deleted_at", () => new Date())
-export class DoggrCompositeEntity {
+@SoftDeletable(() => DungeonCompositeEntity, "deleted_at", () => new Date())
+export class DungeonCompositeEntity {
 	@Property()
 	created_at = new Date();
 
@@ -28,3 +28,12 @@ export class DoggrCompositeEntity {
 	@Property({ nullable: true })
 	deleted_at?: Date;
 }
+
+
+
+/*
+
+	@Property
+
+
+*/

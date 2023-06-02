@@ -1,6 +1,6 @@
 import { Entity, Property, Unique, OneToMany, Collection, Cascade } from "@mikro-orm/core";
 import { SoftDeletable } from "mikro-orm-soft-delete";
-import { DoggrBaseEntity } from "./DoggrBaseEntity.js";
+import { DungeonBaseEntity } from "./DungeonBaseEntity.js";
 import { Match } from "./Match.js";
 
 import { Enum } from "@mikro-orm/core";
@@ -12,29 +12,57 @@ export enum UserRole {
 	USER = 'User'
 }
 
+
+export type campaignName = "Baldur's Gate: Descent into Avernus" | "Candlekeep Mysteries" | "Critical Role: Call of the Netherdeep"
+	| "Curse of Strahd" | "Dragonlance: Shadow of the Dragon Queen" | "Dragons of Stormwreck Isle" | "Ghosts of Saltmarsh" | "Ghost of Dragonspear Castle" | "Hoard of the Dragon Queen"
+	| "Icewind Dale: Rime of the Frostmaiden" | "Infernal Machine Rebuild" | "Journeys through the Radiant Citadel" | "Keys from the Golden Vault"
+	| "Lost Laboratory of Kwalish" | "Lost Mine of Phandelver" | "Out of the Abyss" | "Princes of the Apocalypse" | "Storm King's Thunder" | "Tales from the Yawning Portal"
+	| "The Forge of Fury" | "Tomb of Horrors"| "The Rise of Tiamat" | "The Wild Beyond the Witchlight" | "Tomb of Annihilation" | "Tyranny of Dragons" | "Waterdeep: Dragon Heist"
+	| "Waterdeep: Dungeon of the Mad Mage";
+
+export type stateAbbrev = "AL" | "AK" | "AZ" | "AR" | "CA" | "CO" | "CT" | "DE" | "FL" | "GA" | "HI" | "ID" | "IL" | "IN" | "IA" | "KS" | "KY" | "LA" | "ME"
+	| "MD" | "MA" | "MI" | "MN" | "MS" | "MO" | "MT" | "NE" | "NV" | "NH" | "NJ" | "NM" | "NY" | "NC" | "ND" | "OH" | "OK" | "OR" | "PA" | "RI" | "SC" | "SD"
+	| "TN" | "TX" | "UT" | "VT" | "VA" | "WA" | "WV" | "WI" | "WY";
+
+export type gameRole = "Player" | "Dungeon Master";
+
+
 // https://github.com/TheNightmareX/mikro-orm-soft-delete
 // Yes, it's really that easy.
 @SoftDeletable(() => User, "deleted_at", () => new Date())
 @Entity({ tableName: "users"})
-export class User extends DoggrBaseEntity {
+export class User extends DungeonBaseEntity {
+	
+	@Property()
+	username!: string;
+	
 	@Property()
 	@Unique()
 	email!: string;
 	
 	@Property()
-	name!: string
+	city!: string;
+	
+	@Property()
+	state!: stateAbbrev;
 
 	@Property()
 	password!: string;
 
 	@Property()
-	petType!: string;
+	roleInGame!: gameRole;
+	
+	@Property()
+	campaign!: campaignName;
+	
+	@Property()
+	seatsOpen!: number;
+	
+	@Property()
+	inactive: boolean = false;
 
 	@Enum(() => UserRole)
 	role!: UserRole; // string enum
-
-	@Property({fieldName: 'img_uri'})
-	imgUri!: string;
 
 	// Note that these DO NOT EXIST in the database itself!
 	@OneToMany(

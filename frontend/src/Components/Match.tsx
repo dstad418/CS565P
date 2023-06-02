@@ -5,6 +5,7 @@ import { useAuth } from "@/Services/Auth.tsx";
 import { getNextProfileFromServer } from "@/Services/HttpClient.tsx";
 import { MatchService } from "@/Services/MatchService.tsx";
 import { PassService } from "@/Services/PassService.tsx";
+import { MessageService} from "@/Services/MessageService.tsx";
 import { useContext, useEffect, useState } from "react";
 
 export const Match = () => {
@@ -39,12 +40,21 @@ export const Match = () => {
 				fetchProfile();
 			});
 	};
+	
+	const onMessageButtonClick = () => {
+		MessageService.send(auth.userId, currentProfile.id, message)
+			.catch(err => {
+				console.error(err);
+			});
+	};
 
-	const profile = (
+
+const profile = (
 		<Profile
 			{...currentProfile}
 			onLikeButtonClick={onLikeButtonClick}
 			onPassButtonClick={onPassButtonClick}
+			onMessageButtonClick={onMessageButtonClick}
 		/>
 	);
 
