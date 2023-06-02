@@ -40,13 +40,19 @@ void tap.test("List all users from /dbvoid tap.test", async () => {
 	response.statusCode.should.equal(200);
 });
 
+// Test message for creating a new user for Dungeon Finder
 void tap.test("Creating a new user", async () => {
 	const payload = {
-		name: "void tap.testname",
+		username: "void tap.testname",
 		email: faker.internet.email(),
+		city: "Seattle",
+		state: "WA",
 		password: "password",
+		roleInGame: "Player",
+		campaign: "Tales from the Yawning Portal",
+		seatsOpen: 3,
+		inactive: false,
 		role: UserRole.USER,
-		petType: "Dog"
 	};
 
 	const response = await app.inject({
@@ -59,7 +65,7 @@ void tap.test("Creating a new user", async () => {
 	response.payload.should.not.equal(payload);
 	const resPayload = response.json();
 	resPayload.email.should.equal(payload.email);
-	resPayload.petType.should.equal("Dog");
+	resPayload.campaign.should.equal("Tales from the Yawning Portal");
 });
 
 void tap.test("Creating a new message", async () => {
@@ -200,7 +206,7 @@ void tap.test("Testing message bad words filter", async () => {
 	const payload = {
 		sender_id: 1,
 		receiver_id: 2,
-		message: "Hi you shit"
+		message: "Hi you shit" // LOL
 	};
 
 	const response = await app.inject({

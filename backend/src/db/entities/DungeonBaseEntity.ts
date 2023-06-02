@@ -30,10 +30,3 @@ export class DungeonCompositeEntity {
 }
 
 
-
-/*
-
-	@Property
-
-
-*/
