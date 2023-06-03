@@ -1,14 +1,25 @@
+import { campaignName, stateAbbrev, gameRole } from "./db/entities/User.js";
+
 export type ICreateUsersBody = {
-	name: string,
+	username: string,
 	email: string,
+	city: string,
+	state: stateAbbrev,
 	password: string,
-	petType: string
+	roleInGame: gameRole,
+	campaign: campaignName,
+	seatsOpen: number,
+	inactive: boolean,
 }
 
 export type IUpdateUsersBody = {
-	name: string,
 	id: number,
-	petType: string
+	username: string,
+	city: string,
+	state: stateAbbrev,
+	campaign: campaignName,
+	roleInGame: gameRole,
+	seatsOpen: number,
 }
 
 export type ICreateMessage = {

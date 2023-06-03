@@ -70,7 +70,7 @@ export class UserSeeder extends Seeder {
 			password: "KVa2xhEeTw9",
 			roleInGame: "Player",
 			campaign: "Keys from the Golden Vault",
-			seatsOpen: 6,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -83,7 +83,7 @@ export class UserSeeder extends Seeder {
 			password: "vaKzTv9te6n",
 			roleInGame: "Player",
 			campaign: "Out of the Abyss",
-			seatsOpen: 6,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -96,7 +96,7 @@ export class UserSeeder extends Seeder {
 			password: "eVKJ1Z",
 			roleInGame: "Player",
 			campaign: "Keys from the Golden Vault",
-			seatsOpen: 2,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -109,7 +109,7 @@ export class UserSeeder extends Seeder {
 			password: "ZXT2KjyiN",
 			roleInGame: "Player",
 			campaign: "Icewind Dale: Rime of the Frostmaiden",
-			seatsOpen: 5,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -122,7 +122,7 @@ export class UserSeeder extends Seeder {
 			password: "3EDk5yfObNPA",
 			roleInGame: "Player",
 			campaign: "Baldur's Gate: Descent into Avernus",
-			seatsOpen: 5,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -148,7 +148,7 @@ export class UserSeeder extends Seeder {
 			password: "7ZH2fbRC",
 			roleInGame: "Player",
 			campaign: "Curse of Strahd",
-			seatsOpen: 4,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -161,7 +161,7 @@ export class UserSeeder extends Seeder {
 			password: "oGVpSPYHGI",
 			roleInGame: "Player",
 			campaign: "Storm King's Thunder",
-			seatsOpen: 1,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -174,7 +174,7 @@ export class UserSeeder extends Seeder {
 			password: "pG9FwSjDm",
 			roleInGame: "Player",
 			campaign: "Tomb of Annihilation",
-			seatsOpen: 3,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -187,7 +187,7 @@ export class UserSeeder extends Seeder {
 			password: "f5nG4PjKz",
 			roleInGame: "Player",
 			campaign: "Waterdeep: Dragon Heist",
-			seatsOpen: 4,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -200,7 +200,7 @@ export class UserSeeder extends Seeder {
 			password: "sN4JYghv2",
 			roleInGame: "Player",
 			campaign: "Ghosts of Saltmarsh",
-			seatsOpen: 6,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -213,7 +213,7 @@ export class UserSeeder extends Seeder {
 			password: "WZo8cFub1",
 			roleInGame: "Player",
 			campaign: "Lost Mine of Phandelver",
-			seatsOpen: 5,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -226,7 +226,7 @@ export class UserSeeder extends Seeder {
 			password: "bDy7HpKXz",
 			roleInGame: "Player",
 			campaign: "Princes of the Apocalypse",
-			seatsOpen: 3,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -252,7 +252,7 @@ export class UserSeeder extends Seeder {
 			password: "vG7YjTkDz",
 			roleInGame: "Player",
 			campaign: "Hoard of the Dragon Queen",
-			seatsOpen: 4,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -265,7 +265,7 @@ export class UserSeeder extends Seeder {
 			password: "hT4EpKqWx",
 			roleInGame: "Player",
 			campaign: "Ghost of Dragonspear Castle",
-			seatsOpen: 6,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -278,7 +278,7 @@ export class UserSeeder extends Seeder {
 			password: "lJ1SfD3cM",
 			roleInGame: "Player",
 			campaign: "Storm King's Thunder",
-			seatsOpen: 5,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -291,7 +291,7 @@ export class UserSeeder extends Seeder {
 			password: "kN6GhTsVf",
 			roleInGame: "Player",
 			campaign: "Out of the Abyss",
-			seatsOpen: 3,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1110,7 +1110,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Tomb of Annihilation",
-			seatsOpen: 2,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1123,7 +1123,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Princes of the Apocalypse",
-			seatsOpen: 3,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1136,7 +1136,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Hoard of the Dragon Queen",
-			seatsOpen: 4,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1149,7 +1149,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Out of the Abyss",
-			seatsOpen: 6,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1162,7 +1162,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Waterdeep: Dragon Heist",
-			seatsOpen: 2,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1175,7 +1175,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Curse of Strahd",
-			seatsOpen: 5,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1188,7 +1188,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Ghosts of Saltmarsh",
-			seatsOpen: 3,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1201,7 +1201,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Ghosts of Saltmarsh",
-			seatsOpen: 2,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1214,7 +1214,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Tomb of Annihilation",
-			seatsOpen: 4,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -1227,7 +1227,7 @@ export class UserSeeder extends Seeder {
 			password: "sZ8PmRgF2",
 			roleInGame: "Player",
 			campaign: "Princes of the Apocalypse",
-			seatsOpen: 6,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});

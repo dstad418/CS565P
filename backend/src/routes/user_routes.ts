@@ -35,7 +35,7 @@ export function UserRoutesInit(app: FastifyInstance) {
 				// @ts-ignore
 				Object.keys(data.fields).map( (key) => [key, data.fields[key].value])
 			);
-			const { username, email, city, state, password, roleInGame, campaign, seatsOpen } = body;
+			const { username, email, city, state, password, roleInGame, campaign, seatsOpen, inactive} = body;
 			await UploadFileToMinio(data);
 
 			const hashedPw = await bcrypt.hash(password, 10);
@@ -48,10 +48,11 @@ export function UserRoutesInit(app: FastifyInstance) {
 				roleInGame,
 				campaign,
 				seatsOpen,
+				inactive,
 				// We'll only create Admins manually!
 				role: UserRole.USER
 			});
-
+			
 			await req.em.flush();
 			console.log("Created a new Dungeon Finder user [post DB-flush]");
 			return reply.send(newUser);
@@ -61,6 +62,8 @@ export function UserRoutesInit(app: FastifyInstance) {
 		}
 	});
 
+	
+	
 	//READ
 	app.search("/users", async (req, reply) => {
 		const { id } = req.body;
@@ -68,24 +71,34 @@ export function UserRoutesInit(app: FastifyInstance) {
 		try {
 			const theUser = await req.em.findOneOrFail(User, id, {strict: true});
 			reply.send(theUser);
+			console.log("Successful read")
 		} catch (err) {
+			console.log("Read error: ", err.message);
 			reply.status(500).send(err);
 		}
 	});
 
+	
+	
 	// UPDATE
 	app.put<{ Body: IUpdateUsersBody }>("/users", async (req, reply) => {
-		const { username, id, campaign,  } = req.body;
+		const {id, username, city, state, roleInGame, campaign, seatsOpen} = req.body;
 
 		const userToChange = await req.em.findOneOrFail(User, id, {strict: true});
-		userToChange.name = name;
-		userToChange.petType = petType;
+		userToChange.username = username;
+		userToChange.city = city;
+		userToChange.state = state;
+		userToChange.roleInGame = roleInGame;
+		userToChange.campaign = campaign;
+		userToChange.seatsOpen = seatsOpen;
 
 		// Reminder -- this is how we persist our JS object changes to the database itself
 		await req.em.flush();
 		reply.send(userToChange);
 	});
 
+	
+	
 	// DELETE
 	app.delete<{ Body: { my_id: number; id_to_delete: number, password: string } }>("/users", async (req, reply) => {
 		const { my_id, id_to_delete, password } = req.body;
@@ -117,6 +130,8 @@ export function UserRoutesInit(app: FastifyInstance) {
 		}
 	});
 
+	
+	
 	/*Login
 	1) User attempts to create a new account and enters username and password into some User Create page
 	2) Server takes password, salt/hashes/encrypts, store the resulting password in our Users table in the database
@@ -154,6 +169,8 @@ export function UserRoutesInit(app: FastifyInstance) {
 		}
 	});
 
+	
+	
 	app.get("/profile", async(req, reply) => {
 
 		const userRepo = req.em.getRepository(User);

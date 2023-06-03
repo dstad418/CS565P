@@ -50,7 +50,7 @@ void tap.test("Creating a new user", async () => {
 		password: "password",
 		roleInGame: "Player",
 		campaign: "Tales from the Yawning Portal",
-		seatsOpen: 3,
+		seatsOpen: 99,
 		inactive: false,
 		role: UserRole.USER,
 	};
