@@ -20,7 +20,7 @@ export function MessageRoutesInit(app: FastifyInstance) {
 	 now to start using `id` everywhere rather than email address (since THAT is the field
 	 that links tables together in our database, not email...or we give up forever
 	 on enabling LOTS of optimizations.  My personal choice is to refactor, so
-	 the final code solution I merge into our official Doggr repo will be one
+	 the final code solution I merge into our official dungeonFinder repo will be one
 	 that fixes this problem.  We'll do it the simpler way for this solution
 	 and take what we need from the database at any cost.
 	 */

@@ -18,7 +18,7 @@ export class UserSeeder extends Seeder {
 			password: "hashedPw",
 			roleInGame: "Player",
 			campaign: "Tales from the Yawning Portal",
-			seatsOpen: 3,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.ADMIN,
 		});
@@ -44,7 +44,7 @@ export class UserSeeder extends Seeder {
 			password: "pgcEQ9NEPpA",
 			roleInGame: "Player",
 			campaign: "Waterdeep: Dungeon of the Mad Mage",
-			seatsOpen: 2,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});
@@ -57,7 +57,7 @@ export class UserSeeder extends Seeder {
 			password: "L...",
 			roleInGame: "Player",
 			campaign: "Tyranny of Dragons",
-			seatsOpen: 3,
+			seatsOpen: 99,
 			inactive: false,
 			role: UserRole.USER,
 		});

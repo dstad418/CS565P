@@ -22,7 +22,8 @@ export function UserRoutesInit(app: FastifyInstance) {
 			reply.status(500).send(err);
 		}
 	});
-
+	
+	
 	// User CRUD
 	// Refactor note - We DO use email still for creation!  We can't know the ID yet
 	app.post<{ Body: ICreateUsersBody }>("/users", async (req, reply) => {
@@ -30,28 +31,32 @@ export function UserRoutesInit(app: FastifyInstance) {
 		try {
 			const data = await req.file();
 
-
 			const body = Object.fromEntries(
 				// @ts-ignore
 				Object.keys(data.fields).map( (key) => [key, data.fields[key].value])
 			);
-			const { name, email, password, petType } = body;
+			const { username, email, city, state, password, roleInGame, campaign, seatsOpen } = body;
 			await UploadFileToMinio(data);
 
 			const hashedPw = await bcrypt.hash(password, 10);
 			const newUser = await req.em.create(User, {
-				name,
+				username,
 				email,
+				city,
+				state,
 				password: hashedPw,
-				petType,
-				imgUri: data.filename,
+				roleInGame,
+				campaign,
+				seatsOpen,
 				// We'll only create Admins manually!
 				role: UserRole.USER
 			});
 
 			await req.em.flush();
+			console.log("Created a new Dungeon Finder user [post DB-flush]");
 			return reply.send(newUser);
 		} catch (err) {
+			console.log("Failed to create new user!", err.message);
 			return reply.status(500).send({ message: err.message });
 		}
 	});
@@ -70,7 +75,7 @@ export function UserRoutesInit(app: FastifyInstance) {
 
 	// UPDATE
 	app.put<{ Body: IUpdateUsersBody }>("/users", async (req, reply) => {
-		const { name, id, petType } = req.body;
+		const { username, id, campaign,  } = req.body;
 
 		const userToChange = await req.em.findOneOrFail(User, id, {strict: true});
 		userToChange.name = name;

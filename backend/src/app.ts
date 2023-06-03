@@ -5,7 +5,7 @@ import { AuthPlugin } from "./plugins/auth.js";
 import { FastifyBadWordsPlugin } from "./plugins/badwords.js";
 import { FastifySearchHttpMethodPlugin } from "./plugins/http_search.js";
 import { FastifyMikroOrmPlugin } from "./plugins/mikro.js";
-import DoggrRoutes from "./routes/routes.js";
+import dungeonFinderRoutes from "./routes/routes.js";
 import config from "./db/mikro-orm.config.js";
 
 const envToLogger = {
@@ -49,6 +49,6 @@ await app.register(FastifyMikroOrmPlugin, config);
 await app.register(FastifySearchHttpMethodPlugin, {});
 await app.register(FastifyBadWordsPlugin);
 await app.register(AuthPlugin);
-await app.register(DoggrRoutes, {});
+await app.register(dungeonFinderRoutes, {});
 
 export default app;

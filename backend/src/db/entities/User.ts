@@ -25,6 +25,7 @@ export type stateAbbrev = "AL" | "AK" | "AZ" | "AR" | "CA" | "CO" | "CT" | "DE" 
 	| "MD" | "MA" | "MI" | "MN" | "MS" | "MO" | "MT" | "NE" | "NV" | "NH" | "NJ" | "NM" | "NY" | "NC" | "ND" | "OH" | "OK" | "OR" | "PA" | "RI" | "SC" | "SD"
 	| "TN" | "TX" | "UT" | "VT" | "VA" | "WA" | "WV" | "WI" | "WY";
 
+// Either a Dungeon Master or a Player
 export type gameRole = "Player" | "Dungeon Master";
 
 
@@ -57,10 +58,10 @@ export class User extends DungeonBaseEntity {
 	campaign!: campaignName;
 	
 	@Property()
-	seatsOpen!: number;
+	seatsOpen: number = 99;
 	
 	@Property()
-	inactive!: boolean;
+	inactive: boolean = false;
 
 	@Enum(() => UserRole)
 	role!: UserRole; // string enum
