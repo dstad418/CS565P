@@ -26,6 +26,14 @@ export function MatchRoutesInit(app: FastifyInstance) {
 				matchee,
 			});
 
+			// Reduce DM seats by one
+			//	If seats == 0
+			//		inactive == true
+			//		notify DM of full group
+			//		notify user of acceptance into group?
+			//	else seats -= 1
+			//		push to DB
+			
 			//persist it to the database
 			await req.em.flush();
 			// send the match back to the user

@@ -1,30 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export const Match = () => {
-	return(
-		<div>"MATCH PAGE"</div>
-	);
-};
-
-export const Home = () => {
-	return (
-		<div>
-			<Title />
-			<Subtitle />
-		
-		</div>
-	);
-};
-
-export function Title() {
-	return(<h1>Doggr</h1>);
-}
-
-export function Subtitle() {
-	return(<h3>Where your pets find love(tm)</h3>);
-}
-
 
 // 1) Make a place to store the users list result
 // 2) Make the actual request to backend and store result
@@ -38,20 +14,13 @@ export function Subtitle() {
  * You “use” React features at the top of your component similar to how you “import” modules
  * at the top of your file.
  */
-export const Button = () => {
-	const [clicks, setClicks] = useState(0);
-	
-	return (
-		<button
-			onClick={() => {
-				console.log("Clicked!");
-				setClicks(clicks + 1);
-			}}
-		>
-			Clicks: {clicks}
-		</button>
-	);
-};
+
+
+
+
+
+
+
 
 export const UsersList = () => {
 	const [users, setUsers] = useState([]);
