@@ -16,12 +16,6 @@ import axios from "axios";
  */
 
 
-
-
-
-
-
-
 export const UsersList = () => {
 	const [users, setUsers] = useState([]);
 	

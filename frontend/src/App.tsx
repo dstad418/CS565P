@@ -1,18 +1,18 @@
 import { Home } from "@/Components/HomePage.tsx";
 import { Login } from "@/Components/Login.tsx";
 import { Match } from "@/Components/Match.tsx";
-import { DoggrRouter } from "@/DoggrRoutes.tsx";
+import { DungeonFinderRouter } from "@/dungeonFinderRouter.tsx";
 import { AuthProvider } from "@/Services/Auth.tsx";
 import { Link, Route, Routes, Router, BrowserRouter } from "react-router-dom";
-import "@css/DoggrStyles.css";
+import "@css/dungeonFinderStyles.css";
 
 // This is our base React Component
 export function App() {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
-				<div className="App doggr">
-					<DoggrRouter/>
+				<div className="App dungeonFinder">
+					<DungeonFinderRouter/>
 				</div>
 			</AuthProvider>
 		</BrowserRouter>
