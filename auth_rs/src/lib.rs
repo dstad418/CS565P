@@ -3,7 +3,7 @@ use axum::response::{IntoResponse, Response};
 use jsonwebtoken::{DecodingKey, EncodingKey};
 use serde::{Deserialize, Serialize};
 
-// advanced dotenv that lets us directly access .env file options programmically
+// advanced dotenv that lets us directly access .env.ts file options programmically
 pub struct EnvOptions {
     pub database_url: String,
     pub auth_secret: String,

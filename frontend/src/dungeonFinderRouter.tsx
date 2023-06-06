@@ -8,18 +8,18 @@ import { useAuth } from "@/Services/Auth.tsx";
 import { Link, Route, Routes } from "react-router-dom";
 import "@css/dungeonFinderStyles.css";
 
-export function dungeonFinderRouter() {
+export function DungeonFinderRouter() {
 	const auth = useAuth();
 
 	return (
 		<div className={"dungeonFinderfancy"}>
-			<nav className="bg-blue-800 rounded-b shadow-lg mb-4">
+			<nav className="navbar">
 				<div className="navbar justify-center">
 					<div className={"navbar-center lg:flex"}>
 
 						<ul className={"menu menu-horizontal"}>
 							<li><Link to="/">Home</Link></li>
-							<li><Link to="/match"> Match</Link></li>
+							<li><Link to="/match"> Math</Link></li>
 							{auth?.token != null ? (
 								<li><Link to="/logout">Logout</Link></li>
 							) : (

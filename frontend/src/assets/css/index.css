@@ -1,4 +1,10 @@
 :root {
+    --blue: #1773ff;
+    --dark-blue: #1818af;
+    --dark-green: #046a04;
+    --white: #ffffff;
+    --light-grey: #e7e0e0;
+    --black: #000000;
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
@@ -13,6 +19,113 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 }
+
+.back-drop {
+    background-color: var(--light-grey);
+}
+
+.front-drop {
+    margin: 6%;
+    margin-top: -40px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: var(--white);
+}
+
+
+  /***********************  BANNER *********************/
+
+  .spacer-between-modules {
+    margin-left: -10%;
+    margin-right: -10%;
+    margin-top: -25%;
+    z-index: 899;
+  }
+
+  .website-banner {
+    height: auto;
+    width: 98.2%;
+  }
+
+
+  .hello {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    z-index: 900;
+ }
+
+  .intro-message {
+    font-size: 1.3em;
+    margin-top: -18%;
+    margin-bottom: 12%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+
+  /*---------------------- SPACERS --------------------*/
+
+  .banner-spacer {
+    height: 40px;
+  }
+
+  .pre-carousel-spacer {
+    margin: 30px;
+  }
+
+  .post-carousel-spacer {
+    margin: 150px;
+  }
+
+/*---------------------- MODULE SECTION --------------------*/
+
+.module-section {
+    padding-top: 300px;
+}
+
+.module-row {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.module-block {
+    flex: 1;
+    //width: (100%/3);
+    border-style: solid;
+    //border-color: 10px lightgray;
+    height: 100%;
+}
+
+.module-block:hover {
+  background-color:#639ef7;
+  cursor: pointer;
+  border-style: solid;
+  //border-color: 20px red;
+  color: red;
+}
+
+.module-cover {
+    width: 100%;
+ }
+
+.module-text {
+    color: #000000;
+    padding: 5px;
+}
+
+.jump-to-top {
+    width: 150%;
+    margin-left: -20%;
+    background-color: #1773ff;
+    height: 80px;
+}
+
+
+
+
+
 
 a {
     font-weight: 500;

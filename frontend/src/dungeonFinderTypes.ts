@@ -1,3 +1,5 @@
+import { campaignName, stateAbbrev, gameRole, User, UserRole } from "../../backend/src/db/entities/User.ts";
+
 export type State = {
 	currentProfile: ProfileType;
 	likeHistory: Array<ProfileType>;
@@ -5,9 +7,15 @@ export type State = {
 };
 
 export type ProfileType = {
-	imgUri: string;
-	thumbUri: string;
-	name: string;
-	petType: string;
 	id: number;
+	username: string,
+	email: string,
+	city: string,
+	state: stateAbbrev,
+	password: string,
+	roleInGame: gameRole,
+	campaign: campaignName,
+	seatsOpen: number,
+	inactive: boolean,
+	role: UserRole.USER,
 };

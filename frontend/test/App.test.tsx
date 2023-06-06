@@ -8,11 +8,6 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { App } from "../src/App.js";
 
-test("Math.sqrt()", () => {
-	expect(Math.sqrt(4)).toBe(2);
-	expect(Math.sqrt(144)).toBe(12);
-	expect(Math.sqrt(2)).toBe(Math.SQRT2);
-});
 
 test("loads and displays greeting", async () => {
 	// Arrange -- This fake-renders our component to a mock browser

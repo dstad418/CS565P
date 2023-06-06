@@ -1,4 +1,4 @@
-import { ProfileType } from "@/DoggrTypes.ts";
+import { ProfileType } from "@/dungeonFinderTypes.ts";
 import { useAuth } from "@/Services/Auth.tsx";
 import { MessageService } from "@/Services/MessageService.tsx";
 import { useContext, useEffect, useState } from "react";

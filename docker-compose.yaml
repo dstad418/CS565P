@@ -1,5 +1,5 @@
 version: '3'
-services:  
+services:
   postgres:
     container_name: postgres
     image: postgres:15-alpine
@@ -9,14 +9,14 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=doggr
-      - POSTGRES_PASSWORD=doggr
-      - POSTGRES_DB=doggr
+      - POSTGRES_USER=dungeonFinder
+      - POSTGRES_PASSWORD=dungeonFinder
+      - POSTGRES_DB=dungeonFinder
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U doggr"]
+      test: ["CMD-SHELL", "pg_isready -U dungeonFinder"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 25
 
   minio:
     container_name: minio
@@ -25,13 +25,18 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      - MINIO_DEFAULT_BUCKETS=doggr:public
+      - MINIO_DEFAULT_BUCKETS=dungeonFinder:public
       - MINIO_ROOT_USER=minioUser
       - MINIO_ROOT_PASSWORD=minioPass
       - MINIO_SERVER_ACCESS_KEY=minioUser
       - MINIO_SERVER_SECRET_KEY=minioPass
     volumes:
       - minio_data:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 
   backend:
@@ -43,17 +48,23 @@ services:
     environment:
       - DB_HOST=postgres
       - DB_PORT=5432
-      - DB_NAME=doggr
-      - DB_USER=doggr
-      - DB_PASS=doggr
+      - DB_NAME=dungeonFinder
+      - DB_USER=dungeonFinder
+      - DB_PASS=dungeonFinder
       - PORT=8080
       - HOST=0.0.0.0
       - PASSWORD=password
       - NODE_ENV=development
       - AUTH_SECRET=supersecret219340818092358
+      - MINIO_HOST=minio
+      - MINIO_PORT=9000
     depends_on:
       postgres:
         condition: service_healthy
+      minio:
+        condition: service_healthy
+
+
 
 volumes:
   minio_data:
