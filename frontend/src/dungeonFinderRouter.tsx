@@ -17,14 +17,14 @@ export function DungeonFinderRouter() {
 					<div className={"navbar-center lg:flex"}>
 						<p><strong>Welcome to the Dungeon Finder! Please login to search for local games in your area!
 							<br />Good luck, and may all  your rolls be 20's!</strong></p>
-						<ul className={"menu menu-horizontal"}>
-							<li><Link to="/">Home</Link></li>
+						<ul className={"ul-list-parent"}>
+							<li className={"nav-list"}><button className={"navbar-button"}><Link to="/">Home</Link></button></li>
 							{auth?.token != null ? (
-								<li><Link to="/logout">Logout</Link></li>
+								<li className={"nav-list"}><button className={"navbar-button"}><Link to="/logout">Logout</Link></button></li>
 							) : (
 								<>
-									<li><Link to="/login"> Login</Link></li>
-									<li><Link to="/create"> Create Account</Link> </li>
+									<li className={"nav-list"}><button className={"navbar-button"}><Link to="/login"> Login</Link></button></li>
+									<li className={"nav-list"}><button className={"navbar-button"}><Link to="/create"> Create Account</Link></button></li>
 								</>
 							)}</ul>
 

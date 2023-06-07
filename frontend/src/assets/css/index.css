@@ -34,7 +34,7 @@
 
 .dungeonFinderfancy {
     background-color: #1818af;
-    padding:0;
+    padding-top: 18%;
     margin:0;
     top:0;
     bottom:0;
@@ -43,7 +43,7 @@
     width: 100%;
     height: 100%;
     background-size: 100%;
-    padding-bottom: 12%;
+    padding-bottom: 3%;
 }
 
 .back-drop {
@@ -58,18 +58,41 @@
     background-color: var(--white);
 }
 
-
+/****************************/
+/*            NAVBAR     */
+/****************************/
 
 
 .navbar {
     position: fixed;
+    border: 5px solid forestgreen;
     top: 0;
-    width: 100%;
+    left: -20px;
+    width: 120%;
     background-color: #fff; /* Add your desired background color */
     /* Add any other styles you want for the navbar */
 }
 
+.navbar-center {
+    padding-left: 20%;
+}
 
+.nav-list {
+    list-style: none;
+    display: inline;
+    padding-left: 60px;
+}
+
+
+.navbar-button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
 
 /****************************/
 /*            HOME PAGE     */
@@ -86,6 +109,7 @@
     margin: 20px;
     background-color: #e7e0e0;
     border-radius: 10px;
+    border: 5px solid forestgreen;
 }
 
 .module-row {
