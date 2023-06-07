@@ -4,7 +4,6 @@ import { Match } from "@/Components/Match.tsx";
 import { DungeonFinderRouter } from "@/dungeonFinderRouter.tsx";
 import { AuthProvider } from "@/Services/Auth.tsx";
 import { Link, Route, Routes, Router, BrowserRouter } from "react-router-dom";
-import "@css/dungeonFinderStyles.css";
 
 // This is our base React Component
 export function App() {

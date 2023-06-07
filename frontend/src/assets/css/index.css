@@ -1,3 +1,8 @@
+/****************************/
+/*      ROOT CSS            */
+/****************************/
+
+
 :root {
     --blue: #1773ff;
     --dark-blue: #1818af;
@@ -9,9 +14,8 @@
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: var(--light-grey);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -20,68 +24,68 @@
     -webkit-text-size-adjust: 100%;
 }
 
-.back-drop {
+#root {
     background-color: var(--light-grey);
+}
+
+.App {
+    background-color: var(--light-grey);
+}
+
+.dungeonFinderfancy {
+    background-color: #1818af;
+    padding:0;
+    margin:0;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    padding-bottom: 12%;
+}
+
+.back-drop {
+    background-color: white;
 }
 
 .front-drop {
     margin: 6%;
-    margin-top: -40px;
+    margin-top: -20px;
     border-radius: 10px;
     padding: 10px;
     background-color: var(--white);
 }
 
 
-  /***********************  BANNER *********************/
-
-  .spacer-between-modules {
-    margin-left: -10%;
-    margin-right: -10%;
-    margin-top: -25%;
-    z-index: 899;
-  }
-
-  .website-banner {
-    height: auto;
-    width: 98.2%;
-  }
 
 
-  .hello {
-    position: relative;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    z-index: 900;
- }
-
-  .intro-message {
-    font-size: 1.3em;
-    margin-top: -18%;
-    margin-bottom: 12%;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #fff; /* Add your desired background color */
+    /* Add any other styles you want for the navbar */
+}
 
 
-  /*---------------------- SPACERS --------------------*/
 
-  .banner-spacer {
-    height: 40px;
-  }
+/****************************/
+/*            HOME PAGE     */
+/****************************/
 
-  .pre-carousel-spacer {
-    margin: 30px;
-  }
 
-  .post-carousel-spacer {
-    margin: 150px;
-  }
+.homepage-background {
+    background-color: #1818af;
+}
 
-/*---------------------- MODULE SECTION --------------------*/
 
 .module-section {
-    padding-top: 300px;
+    padding: 10px;
+    margin: 20px;
+    background-color: #e7e0e0;
+    border-radius: 10px;
 }
 
 .module-row {
@@ -99,7 +103,7 @@
 }
 
 .module-block:hover {
-  background-color:#639ef7;
+  background-color:lightgreen;
   cursor: pointer;
   border-style: solid;
   //border-color: 20px red;
@@ -123,60 +127,77 @@
 }
 
 
+/****************************/
+/*        LOGIN PAGE     */
+/****************************/
 
-
-
-
-a {
-    font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
-}
-a:hover {
-    color: #535bf2;
+.login-wrapper {
+    margin: 20px;
 }
 
-body {
-    margin: 0;
+
+.login-container {
     display: flex;
-    place-items: center;
-    min-width: 320px;
-    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin-top: -30%;
+    height: 100vh;
 }
+
+.login-box {
+    width: 50%;
+    height: 30%;
+    padding: 2rem;
+    text-align: left;
+    border: 5px solid forestgreen;
+    border-radius: 10px;
+    background-color: var(--light-grey);
+}
+
+.login-box input,
+.login-box button {
+    margin-top: 1rem;
+}
+
+.login-box button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
+/****************************/
+/*    CREATE ACCOUNT PAGE   */
+/****************************/
+
+
+.create-account-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-account-inner-box {
+    margin-top: -30px;
+    width: 50%;
+    height: 30%;
+    padding: 2rem;
+    text-align: left;
+    border: 5px solid forestgreen;
+    border-radius: 10px;
+    background-color: var(--light-grey);
+}
+
+.btn {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
 }
 
-button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
-}
-button:hover {
-    border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-}
 
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-    a:hover {
-        color: #747bff;
-    }
-    button {
-        background-color: #f9f9f9;
-    }
-}
