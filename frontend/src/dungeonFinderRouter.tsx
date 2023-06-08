@@ -2,7 +2,9 @@ import { CreateProfile } from "@/Components/CreateProfile.tsx";
 import { Home } from "@/Components/HomePage.tsx";
 import { Login } from "@/Components/Login.tsx";
 import { Logout } from "@/Components/Logout.tsx";
-import { Match } from "@/Components/Match.tsx";
+import { MessageHistory } from "@/Components/MessageHistory.tsx";
+import { UpdateProfile } from "@/Components/UpdateProfile.tsx";
+import { Campaign } from "@/Components/Campaigns.tsx";
 import { ProtectedRoute } from "@/Components/ProtectedRoute.tsx";
 import { useAuth } from "@/Services/Auth.tsx";
 import { Link, Route, Routes } from "react-router-dom";
@@ -20,7 +22,11 @@ export function DungeonFinderRouter() {
 						<ul className={"ul-list-parent"}>
 							<li className={"nav-list"}><button className={"navbar-button"}><Link to="/">Home</Link></button></li>
 							{auth?.token != null ? (
-								<li className={"nav-list"}><button className={"navbar-button"}><Link to="/logout">Logout</Link></button></li>
+								<>
+									<li className={"nav-list"}><button className={"navbar-button"}><Link to="/logout">Logout</Link></button></li>
+									<li className={"nav-list"}><button className={"navbar-button"}><Link to="/messages">Messages</Link></button></li>
+									<li className={"nav-list"}><button className={"navbar-button"}><Link to="/updateProfile">Update Profile</Link></button></li>
+								</>
 							) : (
 								<>
 									<li className={"nav-list"}><button className={"navbar-button"}><Link to="/login"> Login</Link></button></li>
@@ -34,7 +40,10 @@ export function DungeonFinderRouter() {
 
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/match" element={<ProtectedRoute><Match /></ProtectedRoute>} />
+				<Route path="/messages" element={<ProtectedRoute><MessageHistory/></ProtectedRoute>} />
+				<Route path="/updateProfile" element={<ProtectedRoute><UpdateProfile/></ProtectedRoute>} />
+				<Route path="/campaign/*" element={<ProtectedRoute><Campaign></ProtectedRoute>} />
+				<Route path="/campaign" element={<Home />} />
 				<Route path="/create" element={<CreateProfile/>}/>
 				<Route path="/login" element={<Login />} />
 				<Route path="/logout" element={<Logout />} />
