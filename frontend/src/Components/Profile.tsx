@@ -1,5 +1,4 @@
 import { ProfileType } from "@/dungeonFinderTypes.ts";
-import { useEffect } from "react";
 
 export type ProfileProps = ProfileType & {
 	onLikeButtonClick: () => void;

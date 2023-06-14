@@ -81,15 +81,3 @@ volumes:
   db:
     driver: local
 
-
-  auth_rs:
-  container_name: auth_rs
-  build: ./auth_rs/
-  #restart: always
-  ports:
-    - "3333:3333"
-  environment:
-    - DATABASE_URL=postgres://doggr:doggr@postgres/doggr
-    - AUTH_SECRET=superSecret
-  depends_on:
-    - postgres

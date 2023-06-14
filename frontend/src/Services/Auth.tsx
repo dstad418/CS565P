@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,7 +25,6 @@ const app = initializeApp(firebaseConfig);
  * The authentication context used to provide authentication-related data and functions.
  */
 export const AuthContext = createContext<AuthContextProps | null>(null);
-
 
 /**
  * The definitiono of the authentication context.
@@ -70,6 +69,7 @@ if (!(initialToken == null)) {
 
 export const AuthProvider = ({ children }: any) => {
 	const navigate = useNavigate();
+	const auth = getAuth();
 
 	const [token, setToken] = useState(initialToken);
 	const [userId, setUserId] = useState(initialUserId);
@@ -78,12 +78,17 @@ export const AuthProvider = ({ children }: any) => {
 		console.log("In handleLogin with ", email, password);
 
 		try {
-			const thetoken = await getLoginTokenFromServer(email, password);
-			saveToken(thetoken);
-			await updateAxios(thetoken);
-			// Hooray we're logged in and our token is saved everywhere!
-			navigate(-1);
-			return true;
+			const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+			const user = userCredentials.user;
+
+			if (user) {
+				const theToken = await user.getIdToken();
+				saveToken(theToken);
+				await updateAxios(theToken);
+				// Hooray we're logged in and our token is saved everywhere!
+				navigate(-1);
+				return true;
+			}
 		} catch (err) {
 			console.error("Failed to handle login: ", err);
 			navigate("/login");
@@ -91,9 +96,14 @@ export const AuthProvider = ({ children }: any) => {
 		}
 	};
 
-	const handleLogout = () => {
-		setToken(null);
-		localStorage.removeItem("token");
+	const handleLogout = async () => {
+		try {
+			await auth.signOut();
+			setToken(null);
+			localStorage.removeItem("token");
+		} catch (error) {
+			console.error("Ogout was unsuccessful!");
+		}
 	};
 
 	const saveToken = (thetoken) => {
@@ -131,7 +141,6 @@ function getTokenFromStorage() {
 	console.log("Token found: ", tokenString);
 	return tokenString;
 }
-
 
 /**
  * Retrieves the login token from the server.

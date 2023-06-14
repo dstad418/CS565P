@@ -24,9 +24,6 @@ interface CampaignParams {
  */
 const CampaignWrapper: React.FC = () => {
 	const { number } = useParams<CampaignParams>();
-	//	const {number, title} = useParams<CampaignParams>();
-	//	const { dataToPass } = useParams<CampaignParams>();
-	//	const number = parseInt(dataToPass);
 
 	return (
 		<ProtectedRoute>
@@ -40,7 +37,6 @@ const CampaignWrapper: React.FC = () => {
  * Acts largely the same as DoggrRouter, but will some added webpages/interfaces.
  * Will initially show Home, Login and Create Account on the webpage.
  * But, once logged in, Will show: Home, Logout, Messages and Update Profile instead.
- * @constructor
  */
 export function DungeonFinderRouter() {
 	const auth = useAuth();

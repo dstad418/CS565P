@@ -3,8 +3,8 @@ import { useState } from "react";
 import { ProfileType } from "../dungeonFinderTypes.ts";
 
 /**
-  *Represents the submission status for the profile update.
-  */
+ *Represents the submission status for the profile update.
+ */
 export enum SubmissionStatus {
 	NotSubmitted,
 	SubmitFailed,

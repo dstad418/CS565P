@@ -1,8 +1,5 @@
 import React from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { Campaign } from "./Campaigns.tsx";
-import { ProtectedRoute } from "@/Components/ProtectedRoute.tsx";
-import { AuthProvider, useAuth } from "@/Services/Auth.tsx";
+import { useNavigate } from "react-router-dom";
 
 import yawningPortal from "./../assets/images/636383247115658092.jpeg";
 import outOfAbyss from "./../assets/images/636383500945700817.jpeg";
@@ -436,54 +433,3 @@ export function ModuleSection() {
 		</div>
 	);
 }
-
-/*
-
-
-const dataToBeSent: React.FC<campaignData> = ({nameData, imageData, detailData}) => (
-  <li key={index} className="flex items-center justify-between bg-secondary p-4 rounded-box mb-4">
-    <div>
-      <p className="text-lg">{message[0]}</p>
-      <p className="m-2 text-sm text-neutral-content px-8">{direction}: {message[1].name}</p>
-    </div>
-    <div className="flex items-center">
-      <img
-        src={minioBaseUrl + message[1].imgUri}
-        alt={message[1].name}
-        className="w-12 h-12 rounded-full mr-4"
-      />
-      <button
-        onClick={() => onReplyButtonClick(message[1].id)}
-        className="btn btn-primary btn-circle"
-      >
-        Reply
-      </button>
-    </div>
-  </li>
-);
-
-
-const MessageListItem: React.FC<MessageListItemProps> = ({ message, index, direction }) => (
-  <li key={index} className="flex items-center justify-between bg-secondary p-4 rounded-box mb-4">
-    <div>
-      <p className="text-lg">{message[0]}</p>
-      <p className="m-2 text-sm text-neutral-content px-8">{direction}: {message[1].name}</p>
-    </div>
-    <div className="flex items-center">
-      <img
-        src={minioBaseUrl + message[1].imgUri}
-        alt={message[1].name}
-        className="w-12 h-12 rounded-full mr-4"
-      />
-      <button
-        onClick={() => onReplyButtonClick(message[1].id)}
-        className="btn btn-primary btn-circle"
-      >
-        Reply
-      </button>
-    </div>
-  </li>
-);
-
-
- */

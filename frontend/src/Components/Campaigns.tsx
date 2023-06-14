@@ -1,8 +1,10 @@
+import { MessageService } from "@/Services/MessageService.tsx";
+import { profileState } from "@/Services/RecoilState.tsx";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-import { useParams, useLocation } from "react-router-dom";
-import { ModuleSection } from "@/Components/ModuleSection.tsx";
+import { useAuth } from "@/Services/Auth.tsx";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
 import yawningPortal from "./../assets/images/636383247115658092.jpeg";
 import outOfAbyss from "./../assets/images/636383500945700817.jpeg";
@@ -111,8 +113,12 @@ interface CampaignProps {
 export const Campaign: React.FC<CampaignProps> = ({ number }) => {
 	const [users, setUsers] = useState([]);
 	const [selectedUser, setSelectedUser] = useState(null);
-	const [message, setMessage] = useState("");
+	const [message, setMessage] = useState<string>("");
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [submissionError, setSubmissionError] = useState(false);
+	const auth = useAuth();
+	const currentProfile = useRecoilValue(profileState);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		// Function to fetch user data based on the game type
@@ -131,25 +137,36 @@ export const Campaign: React.FC<CampaignProps> = ({ number }) => {
 				console.error("Error while fetching!", error);
 			}
 		};
-
-		// Call the fetchUserData function
+		
 		fetchUserData();
-	}, [number]); // Run the effect whenever the "number" prop changes
+	}, [number]); // Run the effect whenever number changes
 
+	// Open w/ user info
 	const openModal = (userId) => {
 		const user = users.find((user) => user.id === userId);
 		setSelectedUser(user);
 		setIsModalOpen(true);
 	};
 
+	// Colse
 	const closeModal = () => {
 		setSelectedUser(null);
 		setMessage("");
 		setIsModalOpen(false);
 	};
 
-	const sendMessage = () => {
+	// Send message - I cannibalized key-parts of Messages.tsx for this step! Which is why it's missing.
+	const sendMessage = async () => {
 		// Send the message logic here
+		const sender_id = auth.userId;
+		const receiver_id = currentProfile.id;
+		try {
+			await MessageService.send(sender_id, receiver_id, message);
+			// If we succeed, send the user onward to message history
+			navigate("/messagehistory");
+		} catch (err) {
+			setSubmissionError(true);
+		}
 		console.log("Sending message:", message);
 		closeModal();
 	};
@@ -180,7 +197,7 @@ export const Campaign: React.FC<CampaignProps> = ({ number }) => {
 						</div>
 					))}
 				</div>
-				
+
 				{/* Modal structure 'kinda' pulled from W3 schools, but heavily customized to my stuff*/}
 				{isModalOpen && selectedUser && (
 					<div className="modal">
@@ -191,7 +208,7 @@ export const Campaign: React.FC<CampaignProps> = ({ number }) => {
 							<textarea
 								value={message}
 								onChange={(e) => setMessage(e.target.value)}
-								placeholder="Enter your message"
+								placeholder="Enter your message here..."
 								rows={6}
 							></textarea>
 							<div className="modal-buttons">

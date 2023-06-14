@@ -2,7 +2,6 @@ import React from "react";
 
 /**
  * Footer component to show the GitHub site.
- * @constructor
  */
 export function Footer() {
 	return (

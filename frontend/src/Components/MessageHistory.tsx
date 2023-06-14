@@ -5,7 +5,6 @@ import { profileState } from "@/Services/RecoilState.tsx";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
-import axios from "axios";
 
 type Message = [string, { id: string; name: string; imgUri: string }];
 type MessageListItemProps = { message: Message; index: number; direction: string };
@@ -24,7 +23,7 @@ export const MessageHistory = () => {
 	useEffect(() => {
 		async function getAllMessages() {
 			try {
-				const messagesResponse = await httpClient.search("/messages/all", { id: auth.userId });
+				const messagesResponse = await httpClient.get(`/messages/all?id=${auth.userId}`);
 				const messages = messagesResponse.data;
 				setSentMessages(messages.sent);
 				setReceivedMessages(messages.received);

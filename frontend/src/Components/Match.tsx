@@ -8,7 +8,6 @@ import { useState } from "react";
 
 export const Match = () => {
 	const [currentProfile, setCurrentProfile] = useState<ProfileType>();
-
 	const auth = useAuth();
 
 	const onLikeButtonClick = () => {
@@ -24,7 +23,7 @@ export const Match = () => {
 	};
 
 	const onMessageButtonClick = () => {
-		MessageService.send(auth.userId, currentProfile.id, message).catch((err) => {
+		MessageService.send(auth.userId, currentProfile.id, "").catch((err) => {
 			console.error(err);
 		});
 	};

@@ -1,6 +1,5 @@
 import { httpClient } from "@/Services/HttpClient.tsx";
 import React, { useState } from "react";
-//import { campaignName, stateAbbrev, gameRole, User, UserRole } from "../../../backend/src/db/entities/User.ts";
 import { ProfileType } from "../dungeonFinderTypes.ts";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -51,25 +50,33 @@ export const CreateProfile = () => {
 			},
 		};
 
-		httpClient.post("/users", formData, config).then((response) => {
-			createUserWithEmailAndPassword(auth, email, password)
-				.then((userCredential) => {
-					// Signed in
-					const user = userCredential.user;
-					// ...
-				})
-				.catch((error) => {
-					const errorCode = error.code;
-					const errorMessage = error.message;
-					// ..
-				});
-			console.log("Submit success!", response.status);
-			if (response.status === 200) {
-				setSubmitted(SubmissionStatus.SubmitSucceeded);
-			} else {
+		httpClient
+			.post("/users", formData, config)
+			.then((response) => {
+				createUserWithEmailAndPassword(auth, email, password)
+					.then((userCredential) => {
+						// User account creation successful
+						const user = userCredential.user;
+					})
+					.catch((error) => {
+						// If failed
+						const errorCode = error.code;
+						const errorMessage = error.message;
+					});
+
+				// If succeeded!
+				console.log("Submit success!", response.status);
+				if (response.status === 200) {
+					setSubmitted(SubmissionStatus.SubmitSucceeded);
+				} else {
+					setSubmitted(SubmissionStatus.SubmitFailed);
+				}
+			})
+			.catch((error) => {
+				// Otherwise, catch and handle the error!
+				console.error("Failed to submit profile: ", error);
 				setSubmitted(SubmissionStatus.SubmitFailed);
-			}
-		});
+			});
 	};
 
 	return (

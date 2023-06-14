@@ -3,7 +3,6 @@ import { Footer } from "./Footer.tsx";
 
 /**
  * Homepage that displays ModuleSection and Footer.
- * @constructor
  */
 export const Home = () => {
 	return (
