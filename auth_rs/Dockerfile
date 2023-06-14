@@ -1,6 +1,7 @@
+
 FROM rust:buster as builder
 
-ENV DATABASE_URL=postgres://dungeonFinder:dungeonFinder@postgres/dungeonFinder
+ENV DATABASE_URL=postgres://doggr:doggr@postgres/doggr
 # This HAS to match our backend!
 ENV AUTH_SECRET=superSecret
 
@@ -21,7 +22,7 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /app
-ENV DATABASE_URL=postgres://dungeonFinder:dungeonFinder@postgres/dungeonFinder
+ENV DATABASE_URL=postgres://doggr:doggr@postgres/doggr
 ENV AUTH_SECRET=superSecret
 
 EXPOSE 3333

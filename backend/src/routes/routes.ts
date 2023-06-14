@@ -23,7 +23,7 @@ async function dungeonFinderRoutes(app: FastifyInstance, _options = {}) {
 
 	app.get("/", async (req, reply) => {
 		reply.send("Hello world");
-	})
+	});
 }
 
 export default dungeonFinderRoutes;

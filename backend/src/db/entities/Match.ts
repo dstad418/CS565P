@@ -3,6 +3,9 @@ import { SoftDeletable } from "mikro-orm-soft-delete";
 //import { DungeonBaseEntity } from "./DungeonBaseEntity.js";
 import { User } from "./User.js";
 
+/**
+ * Match acts the same as in Doggr.
+ */
 @SoftDeletable(() => Match, "deleted_at", () => new Date())
 @Entity()
 export class Match {

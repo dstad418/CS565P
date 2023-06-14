@@ -1,21 +1,25 @@
 import { useAuth } from "@/Services/Auth.tsx";
 import { useCallback, useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+/**
+ * Login page, almost the same as Doggr's
+ */
 export function Login() {
 	const context = useAuth();
+	const auth = getAuth();
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [submitFailed, setSubmitFailed] = useState(false);
 
 	const onSubmitLogin = useCallback(async () => {
-		if (context) {
-			const loginSuccess = await context.handleLogin(email, password);
-			if (!loginSuccess) {
-				setSubmitFailed(true);
-			}
-		} else {
-			console.error("We have no auth context WARNING WARNING");
+		try {
+			await signInWithEmailAndPassword(auth, email, password);
+			// If the login is successful, no need to handle the login in the Auth context.
+		} catch (error) {
+			console.error("Login error:", error);
+			setSubmitFailed(true);
 		}
 	}, [email, password, context, setSubmitFailed]);
 

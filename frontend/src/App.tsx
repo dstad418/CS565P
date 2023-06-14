@@ -1,17 +1,18 @@
-import { Home } from "@/Components/HomePage.tsx";
-import { Login } from "@/Components/Login.tsx";
-import { Match } from "@/Components/Match.tsx";
+
 import { DungeonFinderRouter } from "@/dungeonFinderRouter.tsx";
 import { AuthProvider } from "@/Services/Auth.tsx";
-import { Link, Route, Routes, Router, BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
-// This is our base React Component
+/**
+ * The main entry point of the application.
+ * Renders the root component and sets up the routing.
+ */
 export function App() {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
 				<div className="App dungeonFinder">
-					<DungeonFinderRouter/>
+					<DungeonFinderRouter />
 				</div>
 			</AuthProvider>
 		</BrowserRouter>

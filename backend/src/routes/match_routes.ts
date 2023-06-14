@@ -3,9 +3,12 @@ import { Match } from "../db/entities/Match.js";
 import { Pass } from "../db/entities/Pass.js";
 import { User } from "../db/entities/User.js";
 
-
+/**
+ * Base Doggr standard.
+ * @param Instance of Fastify
+ */
 export function MatchRoutesInit(app: FastifyInstance) {
-// CREATE MATCH ROUTE
+	// CREATE MATCH ROUTE
 	/* Refactor - note our change to getReference!
 
 	 getReference/getReference retrieves an entity by its primary key, but it does not actually fetch
@@ -33,7 +36,7 @@ export function MatchRoutesInit(app: FastifyInstance) {
 			//		notify user of acceptance into group?
 			//	else seats -= 1
 			//		push to DB
-			
+
 			//persist it to the database
 			await req.em.flush();
 			// send the match back to the user

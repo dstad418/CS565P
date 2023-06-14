@@ -8,7 +8,6 @@ import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { App } from "../src/App.js";
 
-
 test("loads and displays greeting", async () => {
 	// Arrange -- This fake-renders our component to a mock browser
 	const testRender = render(<App />);

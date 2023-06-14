@@ -25,7 +25,7 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      - MINIO_DEFAULT_BUCKETS=dungeonFinder:public
+      - MINIO_DEFAULT_BUCKETS=dungeonfinder:public
       - MINIO_ROOT_USER=minioUser
       - MINIO_ROOT_PASSWORD=minioPass
       - MINIO_SERVER_ACCESS_KEY=minioUser
@@ -36,7 +36,7 @@ services:
       test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 25
 
 
   backend:
@@ -64,6 +64,15 @@ services:
       minio:
         condition: service_healthy
 
+  frontend:
+    container_name: frontend
+    build: ./frontend/
+    restart: always
+    ports:
+      - "88:80" # We need to map here for convenience, so we don't conflict with a potential possible local server
+    environment:
+      - API_HOST=backend
+      - PORT=8080
 
 
 volumes:
@@ -71,3 +80,16 @@ volumes:
     driver: local
   db:
     driver: local
+
+
+  auth_rs:
+  container_name: auth_rs
+  build: ./auth_rs/
+  #restart: always
+  ports:
+    - "3333:3333"
+  environment:
+    - DATABASE_URL=postgres://doggr:doggr@postgres/doggr
+    - AUTH_SECRET=superSecret
+  depends_on:
+    - postgres

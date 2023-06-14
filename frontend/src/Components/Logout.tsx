@@ -1,14 +1,18 @@
 import { useAuth } from "@/Services/Auth.tsx";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
 
+/**
+ * Await removes the auth key for the user.
+ */
 export function Logout() {
 	const auth = useAuth();
 	const navigate = useNavigate();
 
-	useEffect( () => {
+	useEffect(() => {
 		async function processLogout() {
-			if(auth) {
+			if (auth) {
 				await auth.handleLogout();
 				navigate("/");
 			} else {
@@ -17,10 +21,10 @@ export function Logout() {
 			}
 		}
 
-		processLogout().then( () => {
+		processLogout().then(() => {
 			console.log("Logout completed successfully");
 		});
-	});
+	}, [auth]);
 
-	return (<></>);
+	return null;
 }

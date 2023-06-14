@@ -1,9 +1,35 @@
 import { httpClient } from "@/Services/HttpClient.tsx";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+	apiKey: "AIzaSyAIytDQvnkzx2Yg5rzNgGxrgj4F8bsqmPk",
+	authDomain: "dungeonf-85117.firebaseapp.com",
+	projectId: "dungeonf-85117",
+	storageBucket: "dungeonf-85117.appspot.com",
+	messagingSenderId: "220315831378",
+	appId: "1:220315831378:web:61271c4c49a6059cc2638b",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+/**
+ * The authentication context used to provide authentication-related data and functions.
+ */
 export const AuthContext = createContext<AuthContextProps | null>(null);
 
+
+/**
+ * The definitiono of the authentication context.
+ */
 export type AuthContextProps = {
 	token: string | null;
 	userId: number;
@@ -29,6 +55,10 @@ const updateAxios = async (token: string) => {
 	);
 };
 
+/**
+ * Retrieves the token from local storage.
+ * @returns The token string or null if not found.
+ */
 const initialToken = getTokenFromStorage();
 let initialUserId;
 
@@ -94,7 +124,7 @@ export const useAuth = () => {
 function getTokenFromStorage() {
 	const tokenString = localStorage.getItem("token");
 	console.log(tokenString);
-	if ( typeof tokenString === 'undefined' || tokenString === null) {
+	if (typeof tokenString === "undefined" || tokenString === null) {
 		console.log("No token found");
 		return null;
 	}
@@ -102,6 +132,13 @@ function getTokenFromStorage() {
 	return tokenString;
 }
 
+
+/**
+ * Retrieves the login token from the server.
+ * @param email The user's email.
+ * @param password The user's password.
+ * @returns The login token.
+ */
 export async function getLoginTokenFromServer(email, password) {
 	console.log("In get login token from server with ", email, password);
 
@@ -109,6 +146,11 @@ export async function getLoginTokenFromServer(email, password) {
 	return login_result.data.token;
 }
 
+/**
+ * Retrieves the payload from the token.
+ * @param token The token string.
+ * @returns The token payload.
+ */
 export function getPayloadFromToken(token: string) {
 	const base64Url = token.split(".")[1];
 	if (base64Url == null) {
@@ -131,6 +173,11 @@ export function getPayloadFromToken(token: string) {
 	return payload;
 }
 
+/**
+ * Retrieves the user ID from the token.
+ * @param token The token string.
+ * @returns The user ID.
+ */
 function getUserIdFromToken(token: string) {
 	const payload = getPayloadFromToken(token);
 	return payload.userId;

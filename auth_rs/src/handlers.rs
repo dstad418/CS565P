@@ -1,7 +1,9 @@
+
 use auth_rs::models::{LoggedInUser, User};
 use auth_rs::{AppError, Claims, JWTKeys};
 use axum::http::StatusCode;
 use axum::{Extension, Json};
+use chrono::{DateTime, Utc};
 use jsonwebtoken::{encode, Header};
 
 use sqlx::PgPool;
@@ -30,11 +32,21 @@ async fn try_create_user(conn: &PgPool, credentials: &User) -> Result<StatusCode
         anyhow::bail!("Invalid password!")
     }
 
+    //let current_time = DateTime::;
+    let current_time = Utc::now().naive_utc();
+
+    let hashed_pw = bcrypt::hash(&credentials.password, 10).unwrap();
+
     // Query the database to create the new user
-    let new_user = sqlx::query("INSERT INTO users (name, email, password) VALUES ($1, $2, $3)")
+    let new_user = sqlx::query("INSERT INTO users (name, email, password, pet_type, img_uri, created_at, updated_at, role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)")
         .bind(&credentials.email) // $1
         .bind(&credentials.email) // $2
-        .bind(&credentials.password) // $3
+        .bind(&hashed_pw) // $3
+        .bind("dog".to_string())
+        .bind("dog.jpg".to_string())
+        .bind(current_time)
+        .bind(current_time)
+        .bind("User".to_string())
         .execute(conn)
         .await?;
 
@@ -85,26 +97,26 @@ async fn try_login(
                 &credentials.password, &user.password
             );
         }
-        if user.password != credentials.password {
-            // User sent wrong pw
-            anyhow::bail!("Invalid password!")
-        } else {
-            // Claims are our "payload" from fastify
-            let claims = Claims {
-                email: credentials.email.to_owned(),
-            };
-            // This is the piece we had a lib handle for us in Fastify
-            let keys = JWTKeys::new();
-            // Actually encrypt the token from raw parts
-            let token = encode(&Header::default(), &claims, &keys.encoding)?;
-            // Create our proper response type from the token
-            let new_user = LoggedInUser { token };
 
-            // Send response, including our freshly generated and encrypted token
-            Ok((StatusCode::OK, Json(new_user)))
-        }
+        // Claims are our "payload" from fastify
+        let claims = Claims {
+            email: credentials.email.to_owned(),
+        };
+        // This is the piece we had a lib handle for us in Fastify
+        let keys = JWTKeys::new();
+        // Actually encrypt the token from raw parts
+        let token = encode(&Header::default(), &claims, &keys.encoding)?;
+        // Create our proper response type from the token
+        let new_user = LoggedInUser { token };
+
+        // Send response, including our freshly generated and encrypted token
+        Ok((StatusCode::OK, Json(new_user)))
     } else {
         // user does not exist
         anyhow::bail!("User does not exist!")
     }
 }
+
+
+
+#[axum_macros::debug_handler] pub async fn create_user(     // Collect our database connection pool from establish_connection()     Extension(conn): Extension<PgPool>,     // This will now accept multipart form data     mut payload: Multipart, ) -> Result<StatusCode, AppError> {     let mut credentials: Option<User> = None;     let mut image_data: Option<Vec<u8>> = None;      // Process each field     while let Ok(Some(mut field)) = payload.try_next().await {         let name = field.name().unwrap().to_string();         match name.as_str() {             // Collect the user details in JSON format             "user" => {                 let mut buffer = Vec::new();                 while let Some(chunk) = field.next().await {                     buffer.extend_from_slice(&chunk.unwrap());                 }                 let user: User = serde_json::from_slice(&buffer).unwrap();                 credentials = Some(user);             }             // Collect the image data             "image" => {                 let mut buffer = Vec::new();                 while let Some(chunk) = field.next().await {                     buffer.extend_from_slice(&chunk.unwrap());                 }                 image_data = Some(buffer);             }             _ => {}         }     }      if credentials.is_none() {         return Err(AppError::new("Invalid request: missing user credentials."));     }      let res = try_create_user(&conn, &credentials.unwrap()).await?;     Ok(res) }`
